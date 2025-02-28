@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📷 Image Converter | JPG, PNG, WEBP, BMP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .drop-zone {
+            border: 2px dashed #ccc;
+            transition: all 0.3s ease;
+        }
+        .drop-zone.dragover {
+            border-color: #4F46E5;
+            background-color: rgba(79, 70, 229, 0.1);
+        }
+        .format-option:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-3xl">
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                    📷 Image Converter
+                </h1>
+                <p class="text-gray-600">
+                    Convert images to JPG, PNG, WEBP, and BMP formats
+                </p>
+            </div>
+
+            <!-- File Upload -->
+            <div class="drop-zone rounded-lg p-8 text-center mb-6 cursor-pointer"
+                 id="dropZone"
+                 ondragover="event.preventDefault(); this.classList.add('dragover')"
+                 ondragleave="this.classList.remove('dragover')"
+                 ondrop="handleDrop(event)">
+                <input type="file" id="fileInput" accept="image/*" class="hidden">
+                <label for="fileInput" class="cursor-pointer">
+                    <div class="text-4xl mb-4">☁️</div>
+                    <p class="text-gray-600 mb-2">Drag & drop image or click to upload</p>
+                    <span class="text-sm text-gray-500">Supports: JPG, PNG, BMP, WEBP</span>
+                </label>
+            </div>
+
+            <!-- Format Selection -->
+            <div class="mb-6">
+                <h3 class="text-gray-700 font-medium mb-4">🔄 Convert to:</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <button onclick="selectFormat('png')" class="format-option bg-blue-50 text-blue-600 px-4 py-2 rounded-lg transition-all">
+                        🎨 PNG
+                    </button>
+                    <button onclick="selectFormat('jpeg')" class="format-option bg-green-50 text-green-600 px-4 py-2 rounded-lg transition-all">
+                        🖼️ JPG
+                    </button>
+                    <button onclick="selectFormat('webp')" class="format-option bg-purple-50 text-purple-600 px-4 py-2 rounded-lg transition-all">
+                        🌐 WEBP
+                    </button>
+                    <button onclick="selectFormat('bmp')" class="format-option bg-red-50 text-red-600 px-4 py-2 rounded-lg transition-all">
+                        🖨️ BMP
+                    </button>
+                </div>
+            </div>
+
+            <!-- Preview & Download -->
+            <div class="hidden" id="outputSection">
+                <div class="border rounded-lg p-4 mb-4">
+                    <img id="preview" class="max-h-64 mx-auto mb-4">
+                    <button onclick="downloadImage()" 
+                            class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors w-full">
+                        💾 Download Converted Image
+                    </button>
+                </div>
+            </div>
+
+            <!-- Status Messages -->
+            <div id="status" class="text-center text-sm text-gray-500 mt-4"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentFile = null;
+        let selectedFormat = null;
+
+        // File selection handlers
+        document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+        
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) processFile(file);
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            const file = e.dataTransfer.files[0];
+            if (file) processFile(file);
+            e.target.classList.remove('dragover');
+        }
+
+        function processFile(file) {
+            currentFile = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('preview').src = e.target.result;
+                document.getElementById('outputSection').classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+            showStatus('✅ Image ready for conversion!');
+        }
+
+        function selectFormat(format) {
+            selectedFormat = format;
+            document.querySelectorAll('.format-option').forEach(btn => {
+                btn.classList.remove('ring-2', 'ring-indigo-500');
+            });
+            event.target.classList.add('ring-2', 'ring-indigo-500');
+            showStatus(`Selected format: ${format.toUpperCase()}`);
+        }
+
+        function downloadImage() {
+            if (!currentFile || !selectedFormat) {
+                showStatus('❌ Please select both an image and format!');
+                return;
+            }
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = () => {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
+                
+                canvas.toBlob(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `converted-image.${selectedFormat}`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    showStatus('🎉 Conversion successful! Downloading...');
+                }, `image/${selectedFormat}`, 0.9);
+            };
+            
+            img.src = URL.createObjectURL(currentFile);
+        }
+
+        function showStatus(message) {
+            document.getElementById('status').textContent = message;
+            setTimeout(() => document.getElementById('status').textContent = '', 3000);
+        }
+    </script>
+</body>
+</html>
