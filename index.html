@@ -195,11 +195,74 @@
     </div>
 </a>
 
-            <div class="tool-card">
-                <img src="https://cdn-icons-png.flaticon.com/512/3767/3767114.png" alt="PDF to Word">
-                <h3>PDF to Word</h3>
-                <p>Convert PDF files to editable Word documents effortlessly.</p>
-            </div>
+          <div class="tool-card">
+    <a href="#convert-section" class="tool-link">
+        <img src="https://cdn-icons-png.flaticon.com/512/3767/3767114.png" alt="PDF to Word">
+        <h3>PDF to Word</h3>
+        <p>Convert PDF files to editable Word documents effortlessly. 🚀</p>
+        <span class="cta-emoji">➡️</span>
+    </a>
+</div>
+
+<style>
+.tool-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tool-link {
+    text-decoration: none;
+    color: #2d3436;
+    display: block;
+    position: relative;
+}
+
+.tool-card img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.tool-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #4a90e2;
+}
+
+.tool-card p {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.cta-emoji {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effects */
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.tool-card:hover img {
+    transform: scale(1.1);
+}
+
+.tool-card:hover .cta-emoji {
+    opacity: 1;
+    right: 1.5rem;
+}
+</style>
 
             <!-- More Tools -->
             <div class="tool-card">
