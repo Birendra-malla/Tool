@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Word Converter | SwiftDocs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #2d3436;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 4rem 0;
+            background: #ffffff;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2d3436;
+        }
+
+        .emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .upload-area {
+            border: 2px dashed #adb5bd;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: #4a90e2;
+            transform: translateY(-2px);
+        }
+
+        .convert-btn {
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .convert-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card h3 {
+            margin: 1rem 0;
+            color: #4a90e2;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="emoji">📄➡️📝</div>
+            <h1>Convert PDF to Word Documents</h1>
+            <p>Transform your PDFs into editable Word files in seconds! ✨</p>
+        </div>
+
+        <div class="upload-area">
+            <div class="emoji">📤</div>
+            <h3>Drag & Drop PDF File Here</h3>
+            <p>or</p>
+            <button class="convert-btn">
+                <span class="emoji">📎</span>
+                Choose File
+            </button>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="emoji">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Instant conversion with cloud-powered processing</p>
+            </div>
+            <div class="feature-card">
+                <div class="emoji">🔒</div>
+                <h3>Secure & Private</h3>
+                <p>Files automatically deleted after conversion</p>
+            </div>
+            <div class="feature-card">
+                <div class="emoji">🎯</div>
+                <h3>High Accuracy</h3>
+                <p>Preserve formatting & layout perfectly</p>
+            </div>
+        </div>
+
+        <div class="testimonial">
+            <div class="emoji">🌟</div>
+            <h3>What Our Users Say</h3>
+            <p>"The best PDF to Word converter I've used! Perfect formatting every time." 👩💻</p>
+            <p>"Super fast and easy to use. Highly recommended!" 👍</p>
+        </div>
+
+        <div class="recommended">
+            <h3>Recommended Features ✅</h3>
+            <ul>
+                <li>📱 Mobile-friendly interface</li>
+                <li>🌍 Multi-language support</li>
+                <li>💾 Batch conversion available</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>© 2023 SwiftDocs. All rights reserved. 🔐</p>
+            <p>Trusted by over 1 million users worldwide 🌎</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple animation for upload area
+        const uploadArea = document.querySelector('.upload-area');
+        const convertBtn = document.querySelector('.convert-btn');
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.transform = 'scale(1.02)';
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.transform = 'scale(1)';
+        });
+
+        convertBtn.addEventListener('click', () => {
+            convertBtn.innerHTML = 'Converting... ⏳';
+            setTimeout(() => {
+                convertBtn.innerHTML = 'Download Word File ⬇️';
+                convertBtn.style.backgroundColor = '#28a745';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
