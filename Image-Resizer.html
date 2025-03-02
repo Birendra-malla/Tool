@@ -22,6 +22,11 @@
             margin: 0 auto;
         }
 
+        .ad-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
         .upload-section {
             border: 2px dashed #ccc;
             border-radius: 10px;
@@ -108,8 +113,23 @@
             }
         }
     </style>
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID" crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- Top Ad -->
+    <div class="ad-container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+             data-ad-slot="TOP_AD_SLOT_ID"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <div class="container">
         <div class="upload-section" id="dropZone">
             <p>Drag & drop image or click to upload</p>
@@ -140,6 +160,19 @@
             </div>
             <button id="downloadBtn" disabled>Download Resized Image</button>
         </div>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="ad-container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+             data-ad-slot="BOTTOM_AD_SLOT_ID"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 
     <script>
