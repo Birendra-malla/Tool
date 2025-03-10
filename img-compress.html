@@ -86,6 +86,20 @@
     .file-upload input[type="file"] {
       display: none;
     }
+    .download-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .download-btn:hover {
+      background-color: #218838;
+    }
   </style>
 </head>
 <body>
@@ -120,6 +134,7 @@
         <p>📦 Compressed Size: <span id="compressedSize">-</span> KB</p>
         <img id="compressedImage" src="#" alt="Compressed Image" style="display:none;">
       </div>
+      <a id="downloadLink" class="download-btn" style="display:none;">⬇️ Download Compressed Image</a>
     </div>
   </div>
 
@@ -145,6 +160,7 @@
     const originalSize = document.getElementById('originalSize');
     const compressedSize = document.getElementById('compressedSize');
     const compressedImage = document.getElementById('compressedImage');
+    const downloadLink = document.getElementById('downloadLink');
 
     qualityInput.addEventListener('input', () => {
       qualityValue.textContent = qualityInput.value;
@@ -181,6 +197,11 @@
             // Display sizes
             originalSize.textContent = (file.size / 1024).toFixed(2);
             compressedSize.textContent = (blob.size / 1024).toFixed(2);
+
+            // Enable download link
+            downloadLink.href = compressedUrl;
+            downloadLink.download = `compressed_image_${qualityInput.value}.jpg`;
+            downloadLink.style.display = 'inline-block';
           }, 'image/jpeg', quality);
         };
       };
